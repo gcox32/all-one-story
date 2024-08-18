@@ -10,7 +10,7 @@ export default function About() {
             About the Bible Context App
           </Typography>
           <Typography variant="body1" paragraph>
-            The Bible Context App is designed to help users understand the broader context of any Bible passage they're studying. By providing historical, cultural, and literary context, we aim to enrich your Bible study experience.
+            The Bible Context App is designed to help users understand the broader context of any Bible passage they&apos;re studying. By providing historical, cultural, and literary context, we aim to enrich your Bible study experience.
           </Typography>
           <Typography variant="body1" paragraph>
             Our app allows you to:
@@ -22,7 +22,7 @@ export default function About() {
             <Typography component="li">Understand how the passage fits into the broader narrative of Scripture</Typography>
           </ul>
           <Typography variant="body1">
-            Whether you're a seasoned theologian or new to Bible study, we hope this tool will deepen your understanding and appreciation of the Scriptures.
+            Whether you&apos;re a seasoned theologian or new to Bible study, we hope this tool will deepen your understanding and appreciation of the Scriptures.
           </Typography>
         </Paper>
       </Box>
