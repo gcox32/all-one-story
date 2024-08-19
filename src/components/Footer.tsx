@@ -16,7 +16,7 @@ function Footer() {
           {'.'}
         </Typography>
         <Typography variant="body2" color="text.secondary" align="center" sx={{ mt: 1 }}>
-          Built with love and Next.js
+          Built with Next.js
         </Typography>
       </Container>
     </Box>
