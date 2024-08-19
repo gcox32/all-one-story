@@ -20,10 +20,12 @@ export default function Home() {
 
   const [passageContent, setPassageContent] = useState<string | null>(null);
   const [reference, setReference] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSearch = async (query: string, translation: string) => {
     console.log('Searching for:', query, translation);
     setReference(query);
+    setIsLoading(true);
 
     try {
       const { body } = await post({
@@ -51,6 +53,8 @@ export default function Home() {
     } catch (error) {
       console.error('Error fetching verse:', error);
       setPassageContent('Error fetching verse content');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -66,7 +70,11 @@ export default function Home() {
         <Box sx={{ my: 4 }}>
           <SearchBar onSearch={handleSearch} />
         </Box>
-        <PassageDisplay passageContent={passageContent} reference={reference} />
+        <PassageDisplay 
+          passageContent={passageContent} 
+          reference={reference} 
+          isLoading={isLoading}
+        />
       </Box>
     </Container>
   );

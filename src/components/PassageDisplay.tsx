@@ -1,13 +1,15 @@
 import React from 'react';
-import { Typography, Paper, Box } from '@mui/material';
+import { Paper, Typography } from '@mui/material';
+import Loading from '../app/loading';
 
 interface PassageDisplayProps {
   passageContent: string | null;
   reference: string | null;
+  isLoading: boolean;
 }
 
-const PassageDisplay: React.FC<PassageDisplayProps> = ({ passageContent, reference }) => {
-  if (!passageContent && !reference) {
+const PassageDisplay: React.FC<PassageDisplayProps> = ({ passageContent, reference, isLoading }) => {
+  if (!passageContent && !reference && !isLoading) {
     return null;
   }
 
@@ -18,15 +20,23 @@ const PassageDisplay: React.FC<PassageDisplayProps> = ({ passageContent, referen
           {reference}
         </Typography>
       )}
-      {passageContent && (
-        <Typography variant="body1">
-          {passageContent}
-        </Typography>
-      )}
-      {!passageContent && reference && (
-        <Typography variant="body1">
-          {reference.includes(':') ? 'Loading passage...' : `Showing content for ${reference}`}
-        </Typography>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          {passageContent && (
+            <Typography variant="body1">
+              {passageContent}
+            </Typography>
+          )}
+          {!passageContent && reference && (
+            <Typography variant="body1">
+              {reference.includes(':') 
+                ? 'No passage content available for this reference.' 
+                : `Showing content for ${reference}`}
+            </Typography>
+          )}
+        </>
       )}
     </Paper>
   );
