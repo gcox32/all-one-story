@@ -10,6 +10,11 @@
       "StackName": "amplify-allonestory-dev-3e96c",
       "StackId": "arn:aws:cloudformation:us-east-1:712043496150:stack/amplify-allonestory-dev-3e96c/ca49e0f0-5d9e-11ef-b4cd-126c40acd241",
       "AmplifyAppId": "d3oc8hunws0xmv"
+    },
+    "categories": {
+      "api": {
+        "allonestory": {}
+      }
     }
   }
 }

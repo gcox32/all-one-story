@@ -6,6 +6,10 @@ import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 import { Box } from '@mui/material';
 import './amplifyConfig';
 import { Metadata } from 'next';
+import { Amplify } from 'aws-amplify';
+import awsconfig from '../aws-exports';
+
+Amplify.configure(awsconfig);
 
 export const metadata: Metadata = {
   title: 'All One Story',

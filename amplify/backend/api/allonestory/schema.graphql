@@ -1,0 +1,32 @@
+type ScriptureReference @model @auth(rules: [{ allow: public }]) {
+  id: ID!
+  book: String!
+  chapter: Int
+  verse: Int
+  reference: String! @index(name: "byReference", queryField: "scriptureReferenceByReference")
+  referenceType: ReferenceType!
+  searchCount: Int!
+}
+
+enum ReferenceType {
+  BOOK
+  CHAPTER
+  VERSE
+}
+
+input CreateScriptureReferenceInput {
+  book: String!
+  chapter: Int
+  verse: Int
+  reference: String!
+  referenceType: ReferenceType!
+  searchCount: Int!
+}
+
+type Mutation {
+  batchCreateScriptureReferences(references: [CreateScriptureReferenceInput!]!): [ScriptureReference!]!
+}
+
+type Query {
+  searchScriptureReferences(query: String!, limit: Int): [ScriptureReference!]!
+}
