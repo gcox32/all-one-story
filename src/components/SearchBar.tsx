@@ -43,7 +43,7 @@ interface SearchScriptureReferencesQuery {
 
 const translations = [
   { value: 'ESV', label: 'ESV' },
-  { value: 'NIV', label: 'NIV' },
+  { value: 'LSV', label: 'LSV' },
   { value: 'KJV', label: 'KJV' },
 ];
 

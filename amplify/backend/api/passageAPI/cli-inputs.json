@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/passage": {
+      "name": "/passage",
+      "lambdaFunction": "getPassage",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

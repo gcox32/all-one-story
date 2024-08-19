@@ -1,0 +1,9 @@
+{
+  "lambdaLayers": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "esvApiKey",
+      "environmentVariableName": "ESV_API_KEY"
+    }
+  ]
+}

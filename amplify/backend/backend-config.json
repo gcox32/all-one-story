@@ -17,7 +17,53 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "AppSync"
+    },
+    "passageAPI": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "getPassage"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
     }
   },
-  "function": {}
+  "function": {
+    "getPassage": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_getPassage_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getPassage"
+        }
+      ]
+    },
+    "AMPLIFY_function_getPassage_esvApiKey": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getPassage"
+        }
+      ]
+    },
+    "AMPLIFY_function_getPassage_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getPassage"
+        }
+      ]
+    }
+  }
 }

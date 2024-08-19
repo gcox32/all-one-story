@@ -13,7 +13,15 @@
     },
     "categories": {
       "api": {
-        "allonestory": {}
+        "allonestory": {},
+        "passageAPI": {}
+      },
+      "function": {
+        "getPassage": {
+          "esvApiKey": "ac02855b5f082d527fc6465760ccb99c8519ce5a",
+          "deploymentBucketName": "amplify-allonestory-dev-3e96c-deployment",
+          "s3Key": "amplify-builds/getPassage-647a395858787a427876-build.zip"
+        }
       }
     }
   }
