@@ -49,7 +49,7 @@
         }
       ]
     },
-    "AMPLIFY_function_getPassage_esvApiKey": {
+    "AMPLIFY_function_getPassage_reactAppEsvApiKey": {
       "usedBy": [
         {
           "category": "function",

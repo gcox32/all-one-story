@@ -18,7 +18,7 @@ export const handler = async (event) => {
             };
 
             const response = await axios.get('https://api.esv.org/v3/passage/text/', {
-                headers: { 'Authorization': `Token ${process.env.ESV_API_KEY}` },
+                headers: { 'Authorization': `Token ${process.env.REACT_APP_ESV_API_KEY}` },
                 params: { 
                     q: query,
                     ...esvParams

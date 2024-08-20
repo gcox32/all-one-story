@@ -14,7 +14,7 @@ const PassageDisplay: React.FC<PassageDisplayProps> = ({ passageContent, referen
   }
 
   return (
-    <Paper elevation={3} sx={{ mt: 4, p: 3 }}>
+    <Paper elevation={3} sx={{ mt: 4, p: 3 , height: 300}}>
       {reference && (
         <Typography variant="h6" gutterBottom>
           {reference}

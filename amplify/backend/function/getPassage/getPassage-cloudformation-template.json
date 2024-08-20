@@ -16,7 +16,7 @@
     "s3Key": {
       "Type": "String"
     },
-    "esvApiKey": {
+    "reactAppEsvApiKey": {
       "Type": "String"
     }
   },
@@ -73,8 +73,8 @@
             "REGION": {
               "Ref": "AWS::Region"
             },
-            "ESV_API_KEY": {
-              "Ref": "esvApiKey"
+            "REACT_APP_ESV_API_KEY": {
+              "Ref": "reactAppEsvApiKey"
             }
           }
         },
