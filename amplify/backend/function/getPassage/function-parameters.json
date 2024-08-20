@@ -1,9 +1,7 @@
 {
   "lambdaLayers": [],
-  "environmentVariableList": [
-    {
-      "cloudFormationParameterName": "reactAppEsvApiKey",
-      "environmentVariableName": "REACT_APP_ESV_API_KEY"
-    }
+  "environmentVariableList": [],
+  "secretNames": [
+    "ESV_API_KEY"
   ]
 }

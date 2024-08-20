@@ -49,7 +49,7 @@
         }
       ]
     },
-    "AMPLIFY_function_getPassage_reactAppEsvApiKey": {
+    "AMPLIFY_function_getPassage_s3Key": {
       "usedBy": [
         {
           "category": "function",
@@ -57,7 +57,7 @@
         }
       ]
     },
-    "AMPLIFY_function_getPassage_s3Key": {
+    "AMPLIFY_function_getPassage_secretsPathAmplifyAppId": {
       "usedBy": [
         {
           "category": "function",

@@ -1,4 +1,28 @@
+/*
+Use the following code to retrieve configured secrets from SSM:
+
+const aws = require('aws-sdk');
+
+const { Parameters } = await (new aws.SSM())
+  .getParameters({
+    Names: ["ESV_API_KEY"].map(secretName => process.env[secretName]),
+    WithDecryption: true,
+  })
+  .promise();
+
+Parameters will be of the form { Name: 'secretName', Value: 'secretValue', ... }[]
+*/
+import { SSM, GetParametersCommand } from "@aws-sdk/client-ssm";
 import axios from 'axios';
+
+const ssmClient = new SSM();
+const ssmParams = {
+  Names: ["ESV_API_KEY"].map(secretName => process.env[secretName]),
+  WithDecryption: true,
+};
+const { Parameters } = await ssmClient.send(new GetParametersCommand(ssmParams));
+
+const ESV_API_KEY = Parameters.find(param => param.Name === process.env['ESV_API_KEY']).Value;
 
 export const handler = async (event) => {
     try {
@@ -7,6 +31,9 @@ export const handler = async (event) => {
         let formattedResponse;
 
         if (translation === 'ESV') {
+            // Retrieve the ESV API key from SSM Parameter Store
+            const esvApiKey = ESV_API_KEY;
+
             const esvParams = {
                 "include-passage-references": false,
                 "include-verse-numbers": false,
@@ -18,7 +45,7 @@ export const handler = async (event) => {
             };
 
             const response = await axios.get('https://api.esv.org/v3/passage/text/', {
-                headers: { 'Authorization': `Token ${process.env.REACT_APP_ESV_API_KEY}` },
+                headers: { 'Authorization': `Token ${esvApiKey}` },
                 params: { 
                     q: query,
                     ...esvParams
@@ -39,7 +66,6 @@ export const handler = async (event) => {
             };
         } else if (translation === 'NIV') {
             // Implement NIV-specific logic here
-            // This is a placeholder - you'll need to replace this with actual NIV API call
             throw new Error('NIV translation not implemented yet');
         } else {
             // Default handling for other translations

@@ -6,6 +6,7 @@
   "license": "Apache-2.0",
   "type": "module",
   "dependencies": {
+    "@aws-sdk/client-ssm": "^3.632.0",
     "axios": "^0.21.1"
   },
   "devDependencies": {

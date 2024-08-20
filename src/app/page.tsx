@@ -20,11 +20,13 @@ export default function Home() {
 
   const [passageContent, setPassageContent] = useState<string | null>(null);
   const [reference, setReference] = useState<string | null>(null);
+  const [translation, setTranslation] = useState<string>("ESV");
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSearch = async (query: string, translation: string) => {
     console.log('Searching for:', query, translation);
     setReference(query);
+    setTranslation(translation);
     setIsLoading(true);
 
     try {
@@ -73,6 +75,7 @@ export default function Home() {
         <PassageDisplay 
           passageContent={passageContent} 
           reference={reference} 
+          translation={translation}
           isLoading={isLoading}
         />
       </Box>

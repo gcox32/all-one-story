@@ -19,8 +19,8 @@
       "function": {
         "getPassage": {
           "deploymentBucketName": "amplify-allonestory-dev-3e96c-deployment",
-          "s3Key": "amplify-builds/getPassage-4133317a4b5479795874-build.zip",
-          "reactAppEsvApiKey": "ac02855b5f082d527fc6465760ccb99c8519ce5a"
+          "s3Key": "amplify-builds/getPassage-7154626b593761424b47-build.zip",
+          "secretsPathAmplifyAppId": "d3oc8hunws0xmv"
         }
       }
     }
