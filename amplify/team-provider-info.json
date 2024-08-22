@@ -21,6 +21,11 @@
           "deploymentBucketName": "amplify-allonestory-dev-3e96c-deployment",
           "s3Key": "amplify-builds/getPassage-7154626b593761424b47-build.zip",
           "secretsPathAmplifyAppId": "d3oc8hunws0xmv"
+        },
+        "searchScriptureReferences": {
+          "opensearchEndpoint": "https://search-scripture-reference-index-bsfjuvkpnawfec4crajlpqdoum.aos.us-east-1.on.aws",
+          "deploymentBucketName": "amplify-allonestory-dev-3e96c-deployment",
+          "s3Key": "amplify-builds/searchScriptureReferences-5948566a346e32375564-build.zip"
         }
       }
     }

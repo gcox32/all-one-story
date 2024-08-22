@@ -15,9 +15,6 @@ function Footer() {
           {new Date().getFullYear()}
           {'.'}
         </Typography>
-        <Typography variant="body2" color="text.secondary" align="center" sx={{ mt: 1 }}>
-          Built with Next.js
-        </Typography>
       </Container>
     </Box>
   );

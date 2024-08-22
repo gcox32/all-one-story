@@ -1,4 +1,7 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
-
-export default nextConfig;
+const nextConfig = {
+    transpilePackages: ['lodash'],
+    // Add any other configurations you need here
+  };
+  
+  export default nextConfig;

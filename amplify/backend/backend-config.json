@@ -38,6 +38,12 @@
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
+    },
+    "searchScriptureReferences": {
+      "build": true,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
     }
   },
   "parameters": {
@@ -62,6 +68,30 @@
         {
           "category": "function",
           "resourceName": "getPassage"
+        }
+      ]
+    },
+    "AMPLIFY_function_searchScriptureReferences_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "searchScriptureReferences"
+        }
+      ]
+    },
+    "AMPLIFY_function_searchScriptureReferences_opensearchEndpoint": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "searchScriptureReferences"
+        }
+      ]
+    },
+    "AMPLIFY_function_searchScriptureReferences_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "searchScriptureReferences"
         }
       ]
     }

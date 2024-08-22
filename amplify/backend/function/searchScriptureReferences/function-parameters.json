@@ -1,0 +1,9 @@
+{
+  "lambdaLayers": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "opensearchEndpoint",
+      "environmentVariableName": "OPENSEARCH_ENDPOINT"
+    }
+  ]
+}

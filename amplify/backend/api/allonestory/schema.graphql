@@ -29,4 +29,5 @@ type Mutation {
 
 type Query {
   searchScriptureReferences(query: String!, limit: Int): [ScriptureReference!]!
+  searchScriptureReferencesOpenSearch(query: String!): [ScriptureReference!]! @function(name: "searchScriptureReferences-${env}")
 }

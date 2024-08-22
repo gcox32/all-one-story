@@ -17,6 +17,22 @@ export const searchScriptureReferences = /* GraphQL */ `
     }
   }
 `;
+export const searchScriptureReferencesOpenSearch = /* GraphQL */ `
+  query SearchScriptureReferencesOpenSearch($query: String!) {
+    searchScriptureReferencesOpenSearch(query: $query) {
+      id
+      book
+      chapter
+      verse
+      reference
+      referenceType
+      searchCount
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
 export const getScriptureReference = /* GraphQL */ `
   query GetScriptureReference($id: ID!) {
     getScriptureReference(id: $id) {

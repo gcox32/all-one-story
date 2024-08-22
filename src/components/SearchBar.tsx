@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { 
   TextField, 
   IconButton, 
@@ -9,14 +9,16 @@ import {
   MenuItem, 
   SelectChangeEvent,
   FormControl,
-  Autocomplete
+  Autocomplete,
+  CircularProgress
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { generateClient } from 'aws-amplify/api';
 import { GraphQLQuery } from '@aws-amplify/api';
-import { searchScriptureReferences } from '../graphql/queries';
+import { searchScriptureReferencesOpenSearch } from '../graphql/queries';
 import { Amplify } from 'aws-amplify';
 import awsconfig from '../aws-exports';
+import debounce from 'lodash/debounce';
 
 Amplify.configure(awsconfig);
 
@@ -32,13 +34,10 @@ interface ScriptureReference {
   reference: string;
   referenceType: 'BOOK' | 'CHAPTER' | 'VERSE';
   searchCount: number;
-  createdAt: string;
-  updatedAt: string;
-  __typename: string;
 }
 
-interface SearchScriptureReferencesQuery {
-  searchScriptureReferences: ScriptureReference[];
+interface SearchScriptureReferencesOpenSearchQuery {
+  searchScriptureReferencesOpenSearch: ScriptureReference[];
 }
 
 const translations = [
@@ -48,22 +47,6 @@ const translations = [
 ];
 
 const client = generateClient();
-
-const debounce = <F extends (...args: any[]) => any>(
-  func: F,
-  waitFor: number
-) => {
-  let timeout: ReturnType<typeof setTimeout> | null = null;
-
-  return (...args: Parameters<F>): Promise<ReturnType<F>> =>
-    new Promise((resolve) => {
-      if (timeout) {
-        clearTimeout(timeout);
-      }
-
-      timeout = setTimeout(() => resolve(func(...args)), waitFor);
-    });
-};
 
 const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   const [query, setQuery] = useState('');
@@ -79,17 +62,16 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
     
     setLoading(true);
     try {
-      const response = await client.graphql<GraphQLQuery<SearchScriptureReferencesQuery>>({
-        query: searchScriptureReferences,
+      const response = await client.graphql<GraphQLQuery<SearchScriptureReferencesOpenSearchQuery>>({
+        query: searchScriptureReferencesOpenSearch,
         variables: { 
-          query: searchQuery,
-          limit: 100
+          query: searchQuery
         },
         authMode: 'apiKey'
       });
-
-      if (response.data?.searchScriptureReferences) {
-        setOptions(response.data.searchScriptureReferences);
+  
+      if (response.data?.searchScriptureReferencesOpenSearch) {
+        setOptions(response.data.searchScriptureReferencesOpenSearch);
       }
     } catch (error) {
       console.error('Error fetching scripture references:', error);
@@ -100,16 +82,8 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
 
   const debouncedFetch = useCallback(
     debounce(fetchScriptureReferences, 300),
-    []
+    [fetchScriptureReferences]
   );
-
-  useEffect(() => {
-    if (query) {
-      debouncedFetch(query);
-    } else {
-      setOptions([]);
-    }
-  }, [query, debouncedFetch]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -137,16 +111,15 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
     >
       <Autocomplete
         freeSolo
-        options={options.slice(0, 5)} // Only display top 5 results
+        options={options}
         getOptionLabel={(option) => 
           typeof option === 'string' ? option : option.reference
         }
-        renderOption={(props, option) => {
-          const { key, ...otherProps } = props;
-          return (
-            <li key={key} {...otherProps}><strong>{option.reference}</strong></li>
-          );
-        }}
+        renderOption={(props, option) => (
+          <li {...props} key={option.id}>
+            <strong>{option.reference}</strong>
+          </li>
+        )}
         renderInput={(params) => (
           <TextField
             {...params}
@@ -163,7 +136,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
               ...params.InputProps,
               endAdornment: (
                 <>
-                  {loading ? <span>Loading...</span> : null}
+                  {loading ? <CircularProgress color="inherit" size={20} /> : null}
                   {params.InputProps.endAdornment}
                 </>
               ),
@@ -173,6 +146,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
         inputValue={query}
         onInputChange={(event, newInputValue) => {
           setQuery(newInputValue);
+          debouncedFetch(newInputValue);
         }}
         onChange={(event, newValue) => {
           if (typeof newValue === 'string') {
@@ -182,13 +156,10 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
           }
         }}
         fullWidth
-        loadingText="Loading..."
         loading={loading}
       />
       <FormControl sx={{ m: 1, minWidth: 80 }} size="small">
         <Select
-          labelId="translation-select-label"
-          id="translation-select"
           value={translation}
           onChange={handleTranslationChange}
           variant="standard"
